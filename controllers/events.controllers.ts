@@ -6,7 +6,7 @@ import { clientError, error, success } from "../network/response";
 export const getEvents = async (req: Request, res: Response) => {
   const uid = req.uid;
   try {
-    const events = await Event.find({ user: uid });
+    const events = await Event.find();
     success(res, events as object, 200);
   } catch (err) {
     error(res, "Please contact with an admin", 500, err);
@@ -33,7 +33,7 @@ export const updateEvent = async (req: Request, res: Response) => {
   const { event, uid } = req;
 
   if (event.user.toString() !== uid) {
-    return clientError(res, "Unauthorized", 401);
+    return clientError(res, "No se encuentra autorizado", 401);
   }
 
   try {
@@ -48,7 +48,7 @@ export const deleteEvent = async (req: Request, res: Response) => {
   const { event, uid } = req;
 
   if (event.user.toString() !== uid) {
-    return clientError(res, "Unauthorized", 401);
+    return clientError(res, "No se encuentra autorizado", 401);
   }
   try {
     await Event.findByIdAndDelete(id);

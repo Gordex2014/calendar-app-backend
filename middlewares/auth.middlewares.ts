@@ -7,40 +7,46 @@ import {
 } from "../helpers/dbValidators";
 
 export const userRegisterMiddleware = [
-  body("name", "Name is required").notEmpty(),
+  body("name", "El nombre es obligatorio").notEmpty(),
   validateUserInput,
   body("name", "Name should be a string").isString(),
   validateUserInput,
-  body("name", "Name shouldn't be a number").not().isNumeric(),
+  body("name", "El nombre no debe ser un número").not().isNumeric(),
   validateUserInput,
-  body("email", "Email is required").notEmpty(),
+  body("email", "El correo es obligatorio").notEmpty(),
   validateUserInput,
-  body("email", "Email should be a valid email").isEmail(),
+  body("email", "Debe ingresar un correo válido").isEmail(),
   validateUserInput,
   body("email").custom(isUserAlreadyRegistered),
   validateUserInput,
-  body("password", "Password is required").notEmpty(),
+  body("password", "La contraseña es obligatoria").notEmpty(),
   validateUserInput,
   body("password", "Password should be a string").isString(),
   validateUserInput,
-  body("password", "Password should be at least 6 characters long").isLength({
+  body(
+    "password",
+    "La contraseña debe ser de mínimamente de 6 caractéres"
+  ).isLength({
     min: 6,
   }),
   validateUserInput,
 ];
 
 export const userLoginMiddleware = [
-  body("email", "Email is required").notEmpty(),
+  body("email", "El email es obligatorio").notEmpty(),
   validateUserInput,
-  body("email", "Email should be a valid email").isEmail(),
+  body("email", "Debe ingresar un correo válido").isEmail(),
   validateUserInput,
   body("email").custom(validEmailUserInDb),
   validateUserInput,
-  body("password", "Password is required").notEmpty(),
+  body("password", "La contraseña es obligatoria").notEmpty(),
   validateUserInput,
   body("password", "Password should be a string").isString(),
   validateUserInput,
-  body("password", "Password should be at least 6 characters long").isLength({
+  body(
+    "password",
+    "La contraseña debe ser de mínimamente de 6 caractéres"
+  ).isLength({
     min: 6,
   }),
   validateUserInput,

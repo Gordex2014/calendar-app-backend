@@ -44,5 +44,5 @@ export const renewUser = async (req: Request, res: Response) => {
   const { uid, name } = req;
 
   const token = await generateJWT(uid, name);
-  success(res, { token }, 200);
+  success(res, { uid, name, token }, 200);
 };
