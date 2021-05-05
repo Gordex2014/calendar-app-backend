@@ -4,9 +4,8 @@ import { Event, IEvent } from "../models";
 import { clientError, error, success } from "../network/response";
 
 export const getEvents = async (req: Request, res: Response) => {
-  const uid = req.uid;
   try {
-    const events = await Event.find();
+    const events = await Event.find().populate("user", "name");
     success(res, events as object, 200);
   } catch (err) {
     error(res, "Please contact with an admin", 500, err);
